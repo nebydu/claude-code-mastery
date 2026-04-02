@@ -20,7 +20,7 @@ html {
 
 body {
   line-height: 1.6;
-  color: #1f2937;
+  color: #f1f5f9;
 }
 
 /* ========================================
@@ -32,17 +32,17 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #0a0f1e;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #93c5fd;
+  background: #2563eb;
   border-radius: 4px;
   transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #60a5fa;
+  background: #3b82f6;
 }
 
 /* ========================================
@@ -70,7 +70,7 @@ body {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(to bottom, #93c5fd, #e0e7ff);
+  background: linear-gradient(to bottom, #3b82f6, rgba(59, 130, 246, 0.1));
 }
 
 @media (min-width: 768px) {
@@ -86,9 +86,9 @@ body {
   width: 1.25rem;
   height: 1.25rem;
   border-radius: 50%;
-  background: #2563eb;
-  border: 4px solid #dbeafe;
-  box-shadow: 0 0 0 2px #e0e7ff;
+  background: #3b82f6;
+  border: 4px solid #0a0f1e;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4), 0 0 12px rgba(59, 130, 246, 0.3);
   z-index: 10;
 }
 
@@ -105,7 +105,7 @@ body {
 .skill-bar {
   height: 6px;
   border-radius: 3px;
-  background: #e2e8f0;
+  background: rgba(255, 255, 255, 0.08);
   overflow: hidden;
   margin-top: 0.5rem;
 }
@@ -133,7 +133,7 @@ body {
 }
 
 .nav-link.active {
-  color: #2563eb;
+  color: #60a5fa;
   font-weight: 600;
 }
 
@@ -144,7 +144,7 @@ body {
   left: 0;
   right: 0;
   height: 2px;
-  background: #2563eb;
+  background: linear-gradient(90deg, #60a5fa, #818cf8);
   border-radius: 1px;
 }
 
@@ -153,7 +153,8 @@ body {
    ======================================== */
 
 #navbar.shadow-scroll {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05), 0 4px 20px rgba(0, 0, 0, 0.4);
+  background: rgba(10, 15, 30, 0.95);
 }
 
 /* ========================================
@@ -192,7 +193,7 @@ button:focus-visible {
 }
 
 .project-card:hover {
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2), 0 20px 25px -5px rgba(0, 0, 0, 0.4);
   transform: translateY(-4px);
 }
 
@@ -240,15 +241,108 @@ button:focus-visible {
 }
 
 /* ========================================
-   12. 다크 모드 지원 (향후 확장용)
+   12. Glassmorphism 카드 스타일
    ======================================== */
 
-@media (prefers-color-scheme: dark) {
-  /* 향후 다크 모드 스타일 추가 가능 */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(59, 130, 246, 0.25);
 }
 
 /* ========================================
-   13. 모바일 최적화
+   13. 히어로 그라디언트 텍스트
+   ======================================== */
+
+.text-gradient-hero {
+  background: linear-gradient(135deg, #60a5fa 0%, #818cf8 50%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ========================================
+   14. Dot Grid 히어로 배경
+   ======================================== */
+
+#hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle,
+    rgba(59, 130, 246, 0.15) 1px,
+    transparent 1px
+  );
+  background-size: 32px 32px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#hero::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(
+    circle,
+    rgba(59, 130, 246, 0.08) 0%,
+    transparent 70%
+  );
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ========================================
+   15. 라이트 모드 오버라이드
+   ======================================== */
+
+html:not(.dark) body {
+  background-color: #ffffff;
+  color: #1f2937;
+}
+
+html:not(.dark) #navbar {
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom-color: rgba(0, 0, 0, 0.05);
+}
+
+html:not(.dark) .glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 15px -3px rgba(0, 0, 0, 0.07);
+}
+
+html:not(.dark) #navbar.shadow-scroll {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+html:not(.dark) .timeline-dot {
+  border-color: #ffffff;
+}
+
+html:not(.dark) #hero::before {
+  background-image: radial-gradient(
+    circle,
+    rgba(59, 130, 246, 0.1) 1px,
+    transparent 1px
+  );
+}
+
+/* ========================================
+   16. 모바일 최적화
    ======================================== */
 
 @media (max-width: 640px) {
@@ -278,7 +372,7 @@ button:focus-visible {
 }
 
 /* ========================================
-   14. 성능 최적화 (고정 네비 스크롤 효율화)
+   17. 성능 최적화 (고정 네비 스크롤 효율화)
    ======================================== */
 
 html {

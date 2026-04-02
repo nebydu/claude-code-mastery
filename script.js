@@ -188,7 +188,50 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ========================================
-  // 모듈 7: 연도 자동 업데이트 (푸터 저작권)
+  // 모듈 7: 다크/라이트 테마 토글
+  // ========================================
+  function initThemeToggle() {
+    const htmlEl = document.documentElement;
+    const toggleBtn = document.getElementById('theme-toggle');
+    const iconSun = document.getElementById('theme-icon-sun');
+    const iconMoon = document.getElementById('theme-icon-moon');
+
+    // 테마 적용 함수
+    function applyTheme(theme) {
+      if (theme === 'dark') {
+        htmlEl.classList.add('dark');
+        iconSun?.classList.remove('hidden');
+        iconMoon?.classList.add('hidden');
+      } else {
+        htmlEl.classList.remove('dark');
+        iconMoon?.classList.remove('hidden');
+        iconSun?.classList.add('hidden');
+      }
+      localStorage.setItem('theme', theme);
+    }
+
+    // 저장된 테마 적용 (기본값: dark)
+    applyTheme(localStorage.getItem('theme') || 'dark');
+
+    // 토글 버튼 클릭 시
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
+        const isDark = htmlEl.classList.contains('dark');
+
+        // 회전 애니메이션 추가
+        toggleBtn.classList.add('animate-spin-once');
+        toggleBtn.addEventListener('animationend', () => {
+          toggleBtn.classList.remove('animate-spin-once');
+        }, { once: true });
+
+        // 테마 전환
+        applyTheme(isDark ? 'light' : 'dark');
+      });
+    }
+  }
+
+  // ========================================
+  // 모듈 8: 연도 자동 업데이트 (푸터 저작권)
   // ========================================
   function initCurrentYear() {
     const yearElement = document.getElementById('current-year');
@@ -201,6 +244,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // ========================================
   // 모든 기능 초기화 실행
   // ========================================
+
+  // 테마 토글 (최초 실행 - FOUC 방지)
+  initThemeToggle();
 
   // 메뉴 토글
   initMobileMenu();
